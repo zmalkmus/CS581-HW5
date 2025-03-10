@@ -34,9 +34,9 @@ def main():
 
     # Generate Huffman Codes
     def generate_codes(node, prefix=""):
-        if node[2] is not None:  # Leaf node
+        if node[2] is not None:
             huffman_codes[node[2]] = prefix
-        else:  # Internal node
+        else:
             generate_codes(node[3], prefix + "0")
             generate_codes(node[4], prefix + "1")
 
