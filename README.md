@@ -13,5 +13,9 @@ Ex. File (tab separated values)
 ## How to Run
 
 ```
-python3 <file.py>
+python3 part1.py input.txt
+```
+
+```
+python3 part2.py dimacs_graph.txt
 ```
