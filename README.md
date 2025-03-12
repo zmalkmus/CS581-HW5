@@ -13,5 +13,9 @@ Ex. File (tab separated values)
 ## How to Run
 
 ```
-python3 <file.py>
+python3 part1.py input1.txt
+```
+
+```
+python3 part2.py input2.txt
 ```
