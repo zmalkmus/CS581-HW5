@@ -50,7 +50,6 @@ def ford_fulkerson(graph, source, sink):
     # While there exists an augmenting path p in the residual network Gf
     while True:
         visited = set()
-        # Find an augmenting path
         path = dfs_find_path(graph, source, sink, visited, [])
 
         if not path:
@@ -59,7 +58,7 @@ def ford_fulkerson(graph, source, sink):
         path_flow = min(capacity for _, _, capacity in path)
         augmenting_paths.append(path)
 
-        # Augment flow along path
+        # Augment flow f along p
         for u, v, capacity in path:
             graph[u][v] -= path_flow
             if v not in graph:
@@ -67,7 +66,7 @@ def ford_fulkerson(graph, source, sink):
             if u not in graph[v]:
                 graph[v][u] = 0
             graph[v][u] += path_flow
-
+            
         max_flow += path_flow
         
     # Return max flow and augmenting paths
@@ -92,8 +91,7 @@ def main():
     for i, path in enumerate(augmenting_paths, 1):
         vertices = [str(u) for u, _, _ in path] + [str(path[-1][1])] if path else []
         bottleneck = min(capacity for _, _, capacity in path) if path else 0
-        print(f"Path {i}: {' -> '.join(vertices)} | Capacity: {bottleneck}")
-
+        print(f"{i}: ({' -> '.join(vertices)}) {bottleneck}")
 
 if __name__ == "__main__":
     main()

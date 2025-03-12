@@ -22,6 +22,7 @@ def main():
 
     # Build Huffman tree
     order = 0 
+    # I use a tuple to represent a node in the Huffman tree because I am too lazy to define a class
     heap = [(freq, order, char, None, None) for char, freq in frequency.items()]
     heapq.heapify(heap)
 
@@ -29,7 +30,7 @@ def main():
         left = heapq.heappop(heap)
         right = heapq.heappop(heap)
         order += 1
-        merged = (left[0] + right[0], order, None, left, right)  # Internal node
+        merged = (left[0] + right[0], order, None, left, right)
         heapq.heappush(heap, merged)
 
     # Generate Huffman Codes
@@ -53,11 +54,12 @@ def main():
 
     padding = 8 - len(bit_string) % 8
     bit_string += "0" * padding
-
+    
     byte_array = bytearray()
     for i in range(0, len(bit_string), 8):
         byte_array.append(int(bit_string[i:i+8], 2))
 
+    # Write file
     compressed_file_path = file_path + ".compressed"
     with open(compressed_file_path, 'wb') as file:
         file.write(struct.pack('B', padding))
@@ -65,7 +67,6 @@ def main():
 
     # Print required output
     compressed_file_size = os.path.getsize(compressed_file_path)
-
     print("\nFile size before compression:", file_size, "bytes")
     print("File size after compression:", compressed_file_size, "bytes")
 
